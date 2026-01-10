@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { User } from "@/types/user";
-import { ArrowUpDown } from "lucide-react";
+import { GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { parseDate } from "@/utils/parser";
 
@@ -10,40 +10,58 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        Name
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Name
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
   },
   {
     accessorKey: "email",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        Email
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Email
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
   },
   {
     accessorKey: "distinctId",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold "
-      >
-        Distinct ID
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Distinct ID
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
     cell: ({ row }) => {
       const id = row.getValue("distinctId") as string;
@@ -57,53 +75,77 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "country",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        Country Code
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Country Code
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
   },
   {
     accessorKey: "region",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        Region
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Region
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
   },
   {
     accessorKey: "city",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        City
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          City
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
   },
   {
     accessorKey: "updatedAt",
     header: ({ column }) => (
-      <Button
-        variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="hover:bg-transparent p-0 font-semibold"
-      >
-        Updated At
-        <ArrowUpDown className="ml-2" />
-      </Button>
+      <div className="flex items-center gap-1">
+        <GripVertical className="h-3.5 w-3.5 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-transparent p-0 font-semibold group"
+        >
+          Updated At
+          <div className="ml-1.5 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-4 border-b-gray-400 mb-px"></div>
+            <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-t-4 border-t-gray-400"></div>
+          </div>
+        </Button>
+      </div>
     ),
     cell: ({ row }) => {
       const dateStr = row.getValue("updatedAt") as string;

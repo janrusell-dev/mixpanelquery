@@ -155,6 +155,15 @@ export const dummyUsers: User[] = [
     city: "Frederiksberg",
   },
   {
+    name: "Jan Rusell Engracial",
+    email: "janruselldev@gmail.com",
+    distinctId: "235eaf70-6ab5-453e-b17c-45d9760fff63",
+    updatedAt: "2026-01-12",
+    country: "Philippines",
+    region: "Cebu",
+    city: "Mandaue",
+  },
+  {
     name: "Patrick Susini",
     email: "awu@vimipo.uz",
     distinctId: "90d05788-2aaf-5bb1-8c33-633fcba9c49a",

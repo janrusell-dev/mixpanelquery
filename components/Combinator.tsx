@@ -1,7 +1,7 @@
 import { CombinatorSelectorProps } from "react-querybuilder";
 import { Button } from "./ui/button";
 
-export const CustomCombinator = ({
+export const Combinator = ({
   value,
   handleOnChange,
 }: CombinatorSelectorProps) => {
@@ -10,15 +10,15 @@ export const CustomCombinator = ({
 
   return (
     <div
-      className={`relative w-full flex justify-center items-center transition-all duration-300 
-      ${isOr ? "h-20 my-4" : "h-8 -my-4"}`} // OR expands the gap, AND collapses it
+      className={`relative w-full flex justify-center items-center transition-all duration-300
+      ${isOr ? "h-20 my-4" : "h-6 -my-2"}`}
     >
-      {/* The Connector Line */}
       <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-slate-200 z-0" />
 
       <Button
         variant="outline"
         onClick={toggle}
+        type="button"
         className={`z-10 h-6 px-2 text-[10px] font-bold uppercase shadow-sm rounded-md transition-all
           ${
             isOr

@@ -1,14 +1,4 @@
 import { Field } from "react-querybuilder";
-import { dummyUsers } from "./dummy-data";
-
-// Helper to get unique values for a dropdown
-const getUniqueValues = (key: keyof (typeof dummyUsers)[0]) => {
-  const unique = Array.from(new Set(dummyUsers.map((user) => user[key])));
-  return unique
-    .filter(Boolean)
-    .sort()
-    .map((val) => ({ name: val, label: val }));
-};
 
 export const fields: Field[] = [
   {
@@ -65,10 +55,9 @@ export const fields: Field[] = [
     ],
   },
   {
-    name: "countryCode",
+    name: "country",
     label: "Country Code",
     type: "text",
-    values: getUniqueValues("country"),
     operators: [
       { name: "=", label: "Is" },
       { name: "!=", label: "Is not" },
@@ -81,7 +70,6 @@ export const fields: Field[] = [
     name: "region",
     label: "Region",
     type: "text",
-    values: getUniqueValues("region"),
     operators: [
       { name: "=", label: "Is" },
       { name: "!=", label: "Is not" },

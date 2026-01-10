@@ -1,11 +1,8 @@
 "use client";
 
-import { useFilterStore } from "@/store/useFilterStore";
 import { useUserStore } from "@/store/useUserStore";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Filter, Pencil, Search, User } from "lucide-react";
-import { ActionButton } from "./ui/action-button";
 
 export function FilterBar() {
   const filteredUsers = useUserStore((state) => state.filteredUsers);
@@ -24,23 +21,35 @@ export function FilterBar() {
       </div>
 
       <div className="flex items-center gap-1 text-slate-500">
-        <ActionButton
-          icon={<Filter className="h-3.5 w-3.5" />}
-          label="Hide Filter"
-        />
-        <ActionButton
-          icon={<Pencil className="h-3.5 w-3.5" />}
-          label="Edit Columns"
-        />
-        <ActionButton
-          icon={<User className="h-3.5 w-3.5" />}
-          label="Add/Edit Profile"
-        />
+        <Button
+          variant={"ghost"}
+          className="h-8 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 gap-2 font-medium px-2"
+        >
+          <Filter /> Hide Filter
+        </Button>
+        <Button
+          variant={"ghost"}
+          className="h-8 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 gap-2 font-medium px-2"
+        >
+          <Pencil />
+          Edit Columns
+        </Button>
+        <Button
+          variant={"ghost"}
+          className="h-8 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 gap-2 font-medium px-2"
+        >
+          <User />
+          Add/Edit Profile
+        </Button>
+
         <div className="h-4 w-px bg-slate-200 mx-1" />
-        <ActionButton
-          icon={<Search className="h-3.5 w-3.5" />}
-          label="Search Profiles"
-        />
+        <Button
+          variant={"ghost"}
+          className="h-8 text-slate-500 hover:text-indigo-600 hover:bg-slate-50 gap-2 font-medium px-2"
+        >
+          <Search />
+          Search Profiles
+        </Button>
       </div>
     </div>
   );

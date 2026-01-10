@@ -10,23 +10,10 @@ import "react-querybuilder/dist/query-builder.css";
 import { useUserStore } from "@/store/useUserStore";
 import { FilterMenu } from "./FilterMenu";
 import { User, ChevronRight, X, Trash } from "lucide-react";
-import { CustomValueEditor } from "./CustomValueEditor";
-import { CustomCombinator } from "./CustomCombinator";
-
-const CustomFieldSelector = ({ options, value }: FieldSelectorProps) => (
-  <div className="flex items-center gap-1.5 text-slate-500 mr-1">
-    <div className="bg-slate-200 p-1 rounded">
-      <User className="h-3 w-3 text-slate-600" />
-    </div>
-    <span className="text-[10px] font-bold uppercase tracking-tight text-slate-400">
-      User
-    </span>
-    <ChevronRight className="h-3 w-3 text-slate-300" />
-    <span className="font-bold text-slate-900">
-      {options.find((o) => o.label === value)?.label}
-    </span>
-  </div>
-);
+import { ValueEditor } from "./ValueEditor";
+import { Combinator } from "./Combinator";
+import { FieldSelector } from "./FieldSelector";
+import { OperatorSelector } from "./OperatorSelector";
 
 export function QueryBuilderComponent() {
   const query = useUserStore((state) => state.query);
@@ -47,11 +34,11 @@ export function QueryBuilderComponent() {
             query={query}
             onQueryChange={setQuery}
             controlElements={{
-              combinatorSelector: CustomCombinator,
-              fieldSelector: CustomFieldSelector,
-              valueEditor: CustomValueEditor,
+              fieldSelector: FieldSelector,
+              valueEditor: ValueEditor,
               addRuleAction: () => null,
               addGroupAction: () => null,
+              operatorSelector: OperatorSelector,
               removeRuleAction: ({ handleOnClick }: ActionProps) => (
                 <button
                   onClick={handleOnClick}
@@ -62,10 +49,11 @@ export function QueryBuilderComponent() {
               ),
             }}
             controlClassnames={{
-              queryBuilder: "bg-transparent p-0 border-none shadow-none",
-              rule: "flex items-center gap-2 py-1 bg-transparent border-none w-full max-w-2xl group",
+              queryBuilder: "bg-transparent p-0 border-none",
               ruleGroup:
-                "data-[level='1']:bg-white data-[level='1']:border data-[level='1']:border-slate-200 data-[level='1']:rounded-xl data-[level='1']:p-4 data-[level='1']:shadow-sm data-[level='1']:mb-2 data-[level='0']:bg-transparent",
+                "border-l-2 border-slate-200 ml-6 pl-4 my-4 first:ml-0 first:pl-0 first:border-none",
+              rule: "flex items-center gap-2 py-1 w-full max-w-2xl group",
+              combinators: "first:hidden",
             }}
           />
         </div>

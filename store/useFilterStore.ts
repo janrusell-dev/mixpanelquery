@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useUserStore } from "./useUserStore";
-import { RuleType } from "react-querybuilder";
+import { generateID, RuleType } from "react-querybuilder";
 import { fields } from "@/lib/fields";
 
 export function useFilterStore() {
@@ -11,10 +11,7 @@ export function useFilterStore() {
   const [operator, setOperator] = useState<string>("contains");
   const [value, setValue] = useState<string>("");
   const [propertySearch, setPropertySearch] = useState("");
-
-  const currentFieldConfig = useMemo(() => {
-    return fields.find((f) => f.name === field);
-  }, [field]);
+  const [lastAddedRuleId, setLastAddedRuleId] = useState<string | null>(null);
 
   const filteredProperties = fields.filter((f) =>
     f.label.toLowerCase().includes(propertySearch.toLowerCase())
@@ -38,32 +35,54 @@ export function useFilterStore() {
       rules: [
         ...currentQuery.rules,
         {
+          id: generateID(),
           field: newFieldname,
           operator: defaultOperator,
           value: "",
         } as RuleType,
       ],
     });
-
+    setLastAddedRuleId(generateID());
     setIsOpen(false);
     // Reset search after applying
     setPropertySearch("");
   };
 
-  const applyFilter = () => {
-    if (!field) return;
-    setPropertySearch("");
+  const updateRule = (ruleId: string, updates: Partial<RuleType>) => {
+    setQuery({
+      ...currentQuery,
+      rules: currentQuery.rules.map((rule) =>
+        "id" in rule && rule.id === ruleId ? { ...rule, ...updates } : rule
+      ),
+    });
   };
 
-  const removeFilter = (index: number) => {
-    const newRules = currentQuery.rules.filter((_, i) => i !== index);
-    setQuery({ ...currentQuery, rules: newRules });
+  const addGroup = () => {
+    setQuery({
+      ...currentQuery,
+      rules: [
+        ...currentQuery.rules,
+        {
+          id: generateID(),
+          combinator: "and",
+          rules: [],
+        },
+      ],
+    });
   };
-
   const clearDraft = () => {
     setFieldState("");
     setValue("");
     setPropertySearch("");
+  };
+
+  const clearAll = () => {
+    setQuery({ combinator: "and", rules: [] });
+    clearDraft();
+  };
+
+  const resetLastAddedRule = () => {
+    setLastAddedRuleId(null);
   };
 
   return {
@@ -71,15 +90,17 @@ export function useFilterStore() {
     setField,
     setOperator,
     setValue,
-    applyFilter,
-    removeFilter,
     propertySearch,
     setPropertySearch,
-    currentFieldConfig,
     clearDraft,
     setIsOpen,
     hasFilter: currentQuery.rules.length > 0,
     filteredProperties,
     isOpen,
+    clearAll,
+    addGroup,
+    lastAddedRuleId,
+    resetLastAddedRule,
+    updateRule,
   };
 }
