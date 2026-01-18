@@ -1,11 +1,11 @@
 "use client";
 
-import { useUserStore } from "@/store/useUserStore";
+import { useFilteredUsersStore } from "@/store/useFilteredUsersStore";
 import { Button } from "./ui/button";
 import { Filter, Pencil, Search, User } from "lucide-react";
 
 export function FilterBar() {
-  const filteredUsers = useUserStore((state) => state.filteredUsers);
+  const filteredUsers = useFilteredUsersStore((state) => state.filteredUsers);
 
   return (
     <div className="flex items-center justify-between  border-slate-200 bg-white">
