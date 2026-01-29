@@ -1,41 +1,35 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import { RuleGroupType, RuleType, generateID } from "react-querybuilder";
 import { QueryStore } from "@/types/query";
+import { findGroupById, findGroupIndex } from "@/utils/helper";
+
+const initialQuery: RuleGroupType = {
+  id: "root-group",
+  combinator: "and",
+  rules: [],
+};
 
 function addGroupToTree(
   rules: (RuleType | RuleGroupType)[],
   targetGroupId: string | null,
+  newGroup: RuleGroupType,
 ): (RuleType | RuleGroupType)[] {
   if (!targetGroupId) {
-    return [
-      ...rules,
-      {
-        id: generateID(),
-        combinator: "and",
-        rules: [],
-      },
-    ];
+    return [...rules, newGroup];
   }
 
   return rules.map((rule) => {
     if ("rules" in rule && rule.id === targetGroupId) {
       return {
         ...rule,
-        rules: [
-          ...rule.rules,
-          {
-            id: generateID(),
-            combinator: "and",
-            rules: [],
-          },
-        ],
+        rules: [...rule.rules, newGroup],
       };
     }
     if ("rules" in rule) {
       return {
         ...rule,
-        rules: addGroupToTree(rule.rules, targetGroupId),
+        rules: addGroupToTree(rule.rules, targetGroupId, newGroup),
       };
     }
     return rule;
@@ -63,14 +57,14 @@ function addRuleToTree(
 
 export const useQueryStore = create<QueryStore>()(
   devtools((set, get) => ({
-    query: { combinator: "and", rules: [] },
+    query: initialQuery,
 
     setQuery: (newQuery) => set({ query: newQuery }),
 
     addRule: (rule, targetGroupId = null) =>
       set((state) => {
-        // If no target, add to root rules
-        if (!targetGroupId) {
+        const groupId = targetGroupId ?? state.activeGroupId;
+        if (!groupId) {
           return {
             query: {
               ...state.query,
@@ -79,11 +73,10 @@ export const useQueryStore = create<QueryStore>()(
           };
         }
 
-        // If there is a target, use the recursive helper
         return {
           query: {
             ...state.query,
-            rules: addRuleToTree(state.query.rules, targetGroupId, rule),
+            rules: addRuleToTree(state.query.rules, groupId, rule),
           },
         };
       }),
@@ -112,39 +105,47 @@ export const useQueryStore = create<QueryStore>()(
         },
       })),
 
-    addGroup: (parentGroupId = null) =>
-      set((state) => {
-        const newGroupId = generateID();
-        const newGroup = {
-          id: newGroupId,
-          combinator: "and" as const,
-          rules: [],
-        };
+    addGroup: (parentGroupId: string | null = null) => {
+      const newGroupId = generateID();
+      const newGroup: RuleGroupType = {
+        id: newGroupId,
+        combinator: "and",
+        rules: [],
+        not: false,
+      };
 
-        if (!parentGroupId) {
-          return {
-            query: {
-              ...state.query,
-              rules: [...state.query.rules, newGroup],
-            },
-            lastCreatedGroupId: newGroupId, // Store it
-          };
+      set((state) => {
+        // If parentGroupId doesn't exist in tree, add to root
+        let validParentId = parentGroupId;
+        if (parentGroupId) {
+          const groupExists = findGroupById(state.query.rules, parentGroupId);
+          if (!groupExists) {
+            console.warn(
+              `Parent group ${parentGroupId} not found, adding to root`,
+            );
+            validParentId = null;
+          }
         }
+        const newRules = !parentGroupId
+          ? [...state.query.rules, newGroup]
+          : addGroupToTree(state.query.rules, parentGroupId, newGroup);
 
         return {
-          query: {
-            ...state.query,
-            rules: addGroupToTree(state.query.rules, parentGroupId),
-          },
-          lastCreatedGroupId: newGroupId,
+          query: { ...state.query, rules: newRules },
+          activeGroupId: newGroupId,
         };
-      }),
+      });
 
-    lastCreatedGroupId: null as string | null,
+      return newGroupId;
+    },
+
+    activeGroupId: null as string | null,
+
+    setActiveGroupId: (id: string | null) => set({ activeGroupId: id }),
 
     clearQuery: () =>
       set({
-        query: { combinator: "and", rules: [] },
+        query: initialQuery,
       }),
   })),
 );

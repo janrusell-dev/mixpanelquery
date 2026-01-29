@@ -2,7 +2,6 @@ import { useState } from "react";
 import { generateID, RuleType } from "react-querybuilder";
 import { fields } from "@/lib/fields";
 import { useQueryStore } from "@/store/useQueryStore";
-import { useSelectionStore } from "@/store/useSelectionStore";
 
 export function useFilterBuilder() {
   const query = useQueryStore((state) => state.query);
@@ -11,6 +10,7 @@ export function useFilterBuilder() {
   const updateRuleInStore = useQueryStore((state) => state.updateRule);
   const duplicateRuleInStore = useQueryStore((state) => state.duplicateRule);
   const clearQuery = useQueryStore((state) => state.clearQuery);
+  const activeGroupId = useQueryStore((state) => state.activeGroupId);
 
   const [isOpen, setIsOpen] = useState(false);
   const [field, setFieldState] = useState("");
@@ -19,7 +19,6 @@ export function useFilterBuilder() {
 
   const [propertySearch, setPropertySearch] = useState("");
   const [lastAddedRuleId, setLastAddedRuleId] = useState<string | null>(null);
-  const activeGroupId = useSelectionStore((state) => state.activeGroupId);
   const [hoveredProperty, setHoveredProperty] = useState<{
     name: string;
     label: string;
@@ -30,7 +29,7 @@ export function useFilterBuilder() {
     f.label.toLowerCase().includes(propertySearch.toLowerCase()),
   );
 
-  const setField = (newFieldname: string) => {
+  const setField = (newFieldname: string, targetGroupId?: string | null) => {
     const config = fields.find((f) => f.name === newFieldname);
     setFieldState(newFieldname);
 
@@ -42,18 +41,21 @@ export function useFilterBuilder() {
     setOperator(defaultOperator);
     setValue("");
 
-    const ruleId = generateID();
+    const groupId = targetGroupId !== undefined ? targetGroupId : activeGroupId;
+
+    const newRuleId = generateID();
+
     addRuleToStore(
       {
-        id: ruleId,
+        id: newRuleId,
         field: newFieldname,
         operator: defaultOperator,
         value: "",
       } as RuleType,
-      activeGroupId,
+      groupId,
     );
 
-    setLastAddedRuleId(ruleId);
+    setLastAddedRuleId(newRuleId);
     setIsOpen(false);
     setPropertySearch("");
   };

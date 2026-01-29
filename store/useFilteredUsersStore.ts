@@ -22,20 +22,7 @@ export const useFilteredUsersStore = create<FilteredUsersStore>((set) => ({
 
       if (query.rules.length > 0) {
         filtered = filtered.filter((user) => {
-          return query.rules.every((rule) => {
-            if ("field" in rule && "value" in rule) {
-              const ruleValue = rule.value;
-              if (
-                !ruleValue ||
-                ruleValue === "" ||
-                ruleValue === "Select value..."
-              ) {
-                return true;
-              }
-            }
-
-            return matchRule(user, rule);
-          });
+          return matchRule(user, query);
         });
       }
 

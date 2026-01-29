@@ -1,17 +1,17 @@
 import { User } from "@/types/user";
-import {
-  isRuleOrGroupValid,
-  RuleGroupType,
-  RuleType,
-} from "react-querybuilder";
+import { RuleGroupType, RuleType } from "react-querybuilder";
 import { parseDate } from "./parser";
 
 export const matchRule = (
   user: User,
-  ruleOrGroup: RuleType | RuleGroupType
+  ruleOrGroup: RuleType | RuleGroupType,
 ): boolean => {
   if ("rules" in ruleOrGroup) {
-    return ruleOrGroup.rules.every((r) => matchRule(user, r));
+    const { combinator, rules } = ruleOrGroup;
+
+    return combinator === "and"
+      ? rules.every((r) => matchRule(user, r))
+      : rules.some((r) => matchRule(user, r));
   }
 
   if (!("field" in ruleOrGroup)) return true;
@@ -19,11 +19,9 @@ export const matchRule = (
   const { field, operator, value } = ruleOrGroup;
   const userValue = user[field as keyof User];
 
-  // --- normalize user value ---
   const uVal =
     userValue !== null && userValue !== undefined ? String(userValue) : "";
 
-  // --- normalize rule value ---
   let rVals: string[] = [];
   if (Array.isArray(value)) {
     rVals = value.map((v) => String(v).trim()).filter(Boolean);
@@ -42,11 +40,11 @@ export const matchRule = (
       return rVals.every((rVal) => uVal !== rVal);
     case "contains":
       return rVals.some((rVal) =>
-        uVal.toLowerCase().includes(rVal.toLowerCase())
+        uVal.toLowerCase().includes(rVal.toLowerCase()),
       );
     case "doesNotContain":
       return rVals.every(
-        (rVal) => !uVal.toLowerCase().includes(rVal.toLowerCase())
+        (rVal) => !uVal.toLowerCase().includes(rVal.toLowerCase()),
       );
     case "isSet":
       return uVal !== "";

@@ -7,10 +7,9 @@ import { ValueEditorProps } from "react-querybuilder";
 export function useValueEditorStore(
   props: ValueEditorProps,
   lastAddedRuleId: string | null,
-  resetLastAddedRule: () => void
+  resetLastAddedRule: () => void,
 ) {
   const [open, setOpen] = useState(false);
-  const operator = props.rule?.operator ?? "contains";
 
   const isDateField = useMemo(() => {
     return props.field === "updatedAt" || props.fieldData?.datatype === "date";
@@ -40,8 +39,8 @@ export function useValueEditorStore(
       props.handleOnChange(
         `${format(sevenDaysAgo, "yyyy-MM-dd")} to ${format(
           today,
-          "yyyy-MM-dd"
-        )}`
+          "yyyy-MM-dd",
+        )}`,
       );
     }
   }, [isDateField]);
@@ -55,8 +54,8 @@ export function useValueEditorStore(
       props.handleOnChange(
         `${format(dateRange.from, "yyyy-MM-dd")} to ${format(
           dateRange.to,
-          "yyyy-MM-dd"
-        )}`
+          "yyyy-MM-dd",
+        )}`,
       );
     } else if (dateRange?.from) {
       props.handleOnChange(format(dateRange.from, "yyyy-MM-dd"));
@@ -76,7 +75,7 @@ export function useValueEditorStore(
       return differenceInDays(dateRange.to, dateRange.from) + 1;
     }
     return 0;
-  }, [dateRange]);
+  }, [dateRange?.from, dateRange?.to]);
 
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
@@ -99,7 +98,7 @@ export function useValueEditorStore(
     const uniqueValues = new Set(
       dummyUsers
         .map((user) => user[fieldKey])
-        .filter((val) => val !== null && val !== undefined)
+        .filter((val) => val !== null && val !== undefined),
     );
     uniqueValues.add("");
     return Array.from(uniqueValues)
@@ -112,7 +111,7 @@ export function useValueEditorStore(
 
   const toggleValue = (val: string) => {
     setSelectedValues((prev) =>
-      prev.includes(val) ? prev.filter((v) => v !== val) : [...prev, val]
+      prev.includes(val) ? prev.filter((v) => v !== val) : [...prev, val],
     );
   };
 
@@ -135,8 +134,8 @@ export function useValueEditorStore(
     const committed = !props.value
       ? []
       : Array.isArray(props.value)
-      ? props.value
-      : props.value.split(", ");
+        ? props.value
+        : props.value.split(", ");
 
     if (committed.length === 0) return "Select value...";
     if (committed.length === 1) {

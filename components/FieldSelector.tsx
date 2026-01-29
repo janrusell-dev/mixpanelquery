@@ -20,9 +20,9 @@ export function FieldSelector({
   const combinator = "and";
   return (
     <div className="flex items-center gap-2 text-slate-500 mr-2">
-      <span className="text-sm font-bold text-gray-400 w-10">
-        {isFirstRuleEver && (
-          <span className="text-sm font-black text-slate-400 w-12 uppercase tracking-tight">
+      <span className="text-sm font-semibold text-gray-400 w-10">
+        {isFirstInGroup && (
+          <span className="text-sm font-black text-slate-400 w-12 tracking-tight">
             where
           </span>
         )}

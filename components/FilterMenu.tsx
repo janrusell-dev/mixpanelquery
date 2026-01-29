@@ -3,13 +3,19 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Input } from "./ui/input";
 import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryStore } from "@/store/useQueryStore";
 
 interface FilterMenuProps {
   onSelectOverride?: (fieldName: string) => void;
   trigger?: React.ReactNode;
+  targetGroupId?: string | null;
 }
 
-export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
+export function FilterMenu({
+  onSelectOverride,
+  trigger,
+  targetGroupId,
+}: FilterMenuProps) {
   const {
     setField,
     setPropertySearch,
@@ -20,13 +26,20 @@ export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
     hoveredProperty,
     setHoveredProperty,
   } = useFilterBuilder();
+  const setActiveGroupId = useQueryStore((state) => state.setActiveGroupId);
 
   const handleSelect = (fieldName: string) => {
+    if (targetGroupId !== undefined) {
+      setActiveGroupId(targetGroupId);
+    }
     if (onSelectOverride) {
       onSelectOverride(fieldName);
     } else {
-      setField(fieldName);
+      setField(fieldName, targetGroupId);
     }
+
+    setIsOpen(false);
+    setPropertySearch("");
   };
 
   return (

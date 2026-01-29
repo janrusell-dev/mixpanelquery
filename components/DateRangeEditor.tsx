@@ -38,7 +38,7 @@ export function DateRangeEditor(props: ValueEditorProps) {
                     <p>{daysInRange}</p>
                   </div>
                   <div className="flex-1 text-slate-600 border border-transparent rounded-md h-10 px-4 bg-gray-100 text-md flex items-center justify-center">
-                    <p>days</p>
+                    <p>{daysInRange === 1 ? "day" : "days"} </p>
                   </div>
                 </div>
               </div>

@@ -6,7 +6,8 @@ export interface QueryStore {
   addRule: (rule: RuleType, targetGroupId?: string | null) => void;
   updateRule: (ruleId: string, updates: Partial<RuleType>) => void;
   duplicateRule: (rule: RuleType | RuleGroupType) => void;
-  addGroup: (parentGroupId: string | null) => void;
+  addGroup: (parentGroupId: string | null) => string;
   clearQuery: () => void;
-  lastCreatedGroupId: string | null;
+  activeGroupId: string | null;
+  setActiveGroupId: (id: string | null) => void;
 }
