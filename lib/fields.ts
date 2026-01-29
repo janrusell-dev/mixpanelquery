@@ -56,7 +56,7 @@ export const fields: Field[] = [
   },
   {
     name: "country",
-    label: "Country Code",
+    label: "Country",
     type: "text",
     operators: [
       { name: "=", label: "Is" },
@@ -69,6 +69,18 @@ export const fields: Field[] = [
   {
     name: "region",
     label: "Region",
+    type: "text",
+    operators: [
+      { name: "=", label: "Is" },
+      { name: "!=", label: "Is not" },
+      { name: "contains", label: "Contains" },
+      { name: "doesNotContain", label: "Does not contain" },
+      { name: "isNotSet", label: "Is not set" },
+    ],
+  },
+  {
+    name: "city",
+    label: "City",
     type: "text",
     operators: [
       { name: "=", label: "Is" },

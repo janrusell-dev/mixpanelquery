@@ -3,6 +3,7 @@ import { ChevronRight, User } from "lucide-react";
 import { FieldSelectorProps } from "react-querybuilder";
 import { FilterMenu } from "./FilterMenu";
 import { Button } from "./ui/button";
+import { useQueryStore } from "@/store/useQueryStore";
 
 export function FieldSelector({
   options,
@@ -10,15 +11,21 @@ export function FieldSelector({
   path,
   handleOnChange,
 }: FieldSelectorProps) {
-  const isFirst = path[path.length - 1] === 0;
-
+  const isFirstInGroup = path[path.length - 1] === 0;
+  const isFirstRuleEver = path.length === 1 && path[0] === 0;
+  const query = useQueryStore((state) => state.query);
   const selectedOption = options.find(
-    (o) => "name" in o && o.name === value
+    (o) => "name" in o && o.name === value,
   ) as { name: string; label: string } | undefined;
+  const combinator = "and";
   return (
     <div className="flex items-center gap-2 text-slate-500 mr-2">
-      <span className="text-sm font-bold text-gray-400 w-10">
-        {isFirst ? "where" : "and"}
+      <span className="text-sm font-semibold text-gray-400 w-10">
+        {isFirstInGroup && (
+          <span className="text-sm font-black text-slate-400 w-12 tracking-tight">
+            where
+          </span>
+        )}
       </span>
 
       <FilterMenu

@@ -2,15 +2,20 @@ import { Plus, SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Input } from "./ui/input";
-import { useFilterStore } from "@/store/useFilterStore";
-import { P } from "react-querybuilder/dist/index-CfYDBuoo.mjs";
+import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryStore } from "@/store/useQueryStore";
 
 interface FilterMenuProps {
   onSelectOverride?: (fieldName: string) => void;
   trigger?: React.ReactNode;
+  targetGroupId?: string | null;
 }
 
-export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
+export function FilterMenu({
+  onSelectOverride,
+  trigger,
+  targetGroupId,
+}: FilterMenuProps) {
   const {
     setField,
     setPropertySearch,
@@ -18,15 +23,23 @@ export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
     isOpen,
     setIsOpen,
     filteredProperties,
-  } = useFilterStore();
+    hoveredProperty,
+    setHoveredProperty,
+  } = useFilterBuilder();
+  const setActiveGroupId = useQueryStore((state) => state.setActiveGroupId);
 
   const handleSelect = (fieldName: string) => {
-    if (onSelectOverride) {
-      onSelectOverride(fieldName); // This will update the existing rule
-    } else {
-      setField(fieldName); // This adds a new rule (default behavior)
+    if (targetGroupId !== undefined) {
+      setActiveGroupId(targetGroupId);
     }
+    if (onSelectOverride) {
+      onSelectOverride(fieldName);
+    } else {
+      setField(fieldName, targetGroupId);
+    }
+
     setIsOpen(false);
+    setPropertySearch("");
   };
 
   return (
@@ -35,7 +48,7 @@ export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
         {trigger || (
           <Button
             variant="ghost"
-            className="text-indigo-600 font-semibold gap-1.5"
+            className="hover:text-indigo-600 hover:bg-indigo-50 font-semibold gap-1.5"
           >
             <Plus className="h-4 w-4" /> Filter
           </Button>
@@ -60,17 +73,14 @@ export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
             <div className="w-1/4 bg-transparent border-r  p-2 overflow-y-auto">
               <div className="mb-1 p-1 bg-indigo-100 rounded text-sm">All</div>
               <div className="mb-1 p-1 hover:bg-indigo-50 rounded text-sm">
-                Category 1
-              </div>
-              <div className="mb-1 p-1 hover:bg-indigo-50 rounded text-sm">
-                Category 2
-              </div>
-              <div className="mb-1 p-1 hover:bg-indigo-50 rounded text-sm">
-                Category 3
+                User
               </div>
             </div>
             <div className="w-2/4  rounded-md p-2 overflow-y-auto space-y-2 border-r">
-              <Button className="bg-indigo-600 cursor-pointer ">
+              <Button
+                className="cursor-pointer w-full hover:bg-indigo-100"
+                variant={"ghost"}
+              >
                 <Plus /> Create New
               </Button>
               <p className="text-xs font-medium text-slate-800">
@@ -80,30 +90,29 @@ export function FilterMenu({ onSelectOverride, trigger }: FilterMenuProps) {
                 <button
                   key={f.name}
                   onClick={() => handleSelect(f.name)}
+                  onMouseEnter={() => setHoveredProperty(f)}
+                  onMouseLeave={() => setHoveredProperty(null)}
                   className="w-full text-left px-2 py-2 text-sm hover:bg-indigo-50 hover:text-indigo-700 rounded-md transition-colors"
                 >
                   {f.label}
                 </button>
               ))}
             </div>
-            <div className="w-1/4  rounded-md p-2 overflow-y-auto">
-              {/* {selectedProperty ? (
-              <div>
-                <h3 className="text-sm font-semibold mb-1">
-                  {selectedProperty.label}
-                </h3>
-                <p className="text-xs text-slate-600">
-                  {selectedProperty.description}
+            <div className="w-1/4  rounded-md p-2 p overflow-y-auto">
+              {hoveredProperty ? (
+                <div>
+                  <h3 className="text-sm font-semibold mb-1">
+                    {hoveredProperty.label}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {hoveredProperty.description || "No description available."}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-xs py-2 text-slate-400">
+                  Hover a property to see its description
                 </p>
-              </div>
-            ) : (
-              <p className="text-xs text-slate-400">
-                Select a property to see description
-              </p>
-            )} */}
-              <p className="text-xs text-slate-400">
-                Select a property to see description
-              </p>
+              )}
             </div>
           </div>
         </div>
