@@ -14,6 +14,7 @@ export function useUserTable(data: User[], columns: ColumnDef<User>[]) {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([]);
 
+  // Sets up react-table with sorting, column order, and selection
   const table = useReactTable({
     data,
     columns,

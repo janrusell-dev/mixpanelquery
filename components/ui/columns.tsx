@@ -25,7 +25,17 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       </div>
     ),
-  },
+    cell: ({ row }) => (
+       <div className="flex items-center gap-3">
+    <img
+      src={row.original.avatarUrl}
+      className="h-8 w-8 rounded-full"
+      alt={row.original.name}
+    />
+    <span>{row.original.name}</span>
+  </div>
+    )
+    },
   {
     accessorKey: "email",
     header: ({ column }) => (

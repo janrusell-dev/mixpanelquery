@@ -10,6 +10,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "North Carolina",
     city: "Charlotte",
+    avatarUrl: "https://randomuser.me/api/portraits/men/75.jpg",
   },
   {
     name: "Francis Albrecht",
@@ -19,6 +20,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Georgia",
     city: "Atlanta",
+    avatarUrl: "https://randomuser.me/api/portraits/men/67.jpg",
   },
   {
     name: "Lettie Stevenson",
@@ -28,6 +30,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Delaware",
     city: "Bear",
+    avatarUrl: "https://randomuser.me/api/portraits/men/41.jpg",
   },
   {
     name: "Bess Vaughan",
@@ -37,6 +40,7 @@ export const dummyUsers: User[] = [
     country: "Hong Kong",
     region: "Tsuen Wan District",
     city: "Tsuen Wan",
+    avatarUrl: "https://randomuser.me/api/portraits/men/21.jpg",
   },
   {
     name: "Isabel Zhang",
@@ -46,6 +50,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Connecticut",
     city: "Middletown",
+    avatarUrl: "https://randomuser.me/api/portraits/women/2.jpg",
   },
   {
     name: "Matilda Delgado",
@@ -55,6 +60,7 @@ export const dummyUsers: User[] = [
     country: "New Zealand",
     region: "Auckland",
     city: "Auckland",
+    avatarUrl: "https://randomuser.me/api/portraits/women/3.jpg",
   },
   {
     name: "Charles Piccioli",
@@ -64,6 +70,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Georgia",
     city: "Jonesboro",
+    avatarUrl: "https://randomuser.me/api/portraits/men/4.jpg",
   },
   {
     name: "Michael de Haas",
@@ -73,6 +80,7 @@ export const dummyUsers: User[] = [
     country: "Ukraine",
     region: "Kyiv city",
     city: "Kyiv",
+    avatarUrl: "https://randomuser.me/api/portraits/men/5.jpg",
   },
   {
     name: "Marvin Herrero",
@@ -82,6 +90,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Tennessee",
     city: "Memphis",
+    avatarUrl: "https://randomuser.me/api/portraits/men/89.jpg",
   },
   {
     name: "Harry Maruyama",
@@ -91,6 +100,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "South Dakota",
     city: "Toronto",
+    avatarUrl: "https://randomuser.me/api/portraits/men/60.jpg",
   },
   {
     name: "Grace Cecchini",
@@ -100,6 +110,7 @@ export const dummyUsers: User[] = [
     country: "South Korea",
     region: "Gyeonggi-do",
     city: "Anseong",
+    avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
     name: "Violet Kaneko",
@@ -109,6 +120,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Alabama",
     city: "Birmingham",
+    avatarUrl: "https://randomuser.me/api/portraits/women/23.jpg",
   },
   {
     name: "Nancy Ellis",
@@ -118,6 +130,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Texas",
     city: "Lewisville",
+    avatarUrl: "https://randomuser.me/api/portraits/women/11.jpg",
   },
   {
     name: "Mable Ferguson",
@@ -127,6 +140,7 @@ export const dummyUsers: User[] = [
     country: "Denmark",
     region: "Capital region",
     city: "Frederiksberg",
+    avatarUrl: "https://randomuser.me/api/portraits/women/21.jpg",
   },
   {
     name: "Jan Rusell Engracial",
@@ -136,6 +150,7 @@ export const dummyUsers: User[] = [
     country: "Philippines",
     region: "Cebu",
     city: "Mandaue",
+    avatarUrl: "https://randomuser.me/api/portraits/men/31.jpg",
   },
   {
     name: "Patrick Susini",
@@ -145,6 +160,7 @@ export const dummyUsers: User[] = [
     country: "Germany",
     region: "North Rhine-Westphalia",
     city: "Bonn",
+    avatarUrl: "https://randomuser.me/api/portraits/men/51.jpg",
   },
   {
     name: "Oscar Martinez",
@@ -154,6 +170,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Texas",
     city: "Frisco",
+    avatarUrl: "https://randomuser.me/api/portraits/men/81.jpg",
   },
   {
     name: "Winifred Burke",
@@ -163,6 +180,7 @@ export const dummyUsers: User[] = [
     country: "Netherlands",
     region: "Gelderland",
     city: "Dieren",
+    avatarUrl: "https://randomuser.me/api/portraits/men/91.jpg",
   },
   {
     name: "Jeremy Harper",
@@ -172,6 +190,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Florida",
     city: "Tampa",
+    avatarUrl: "https://randomuser.me/api/portraits/men/56.jpg",
   },
   {
     name: "Isabella Taddei",
@@ -181,6 +200,7 @@ export const dummyUsers: User[] = [
     country: "China",
     region: "Shandong",
     city: "Jinan",
+    avatarUrl: "https://randomuser.me/api/portraits/women/64.jpg",
   },
   {
     name: "Mathilda Marchiani",
@@ -190,6 +210,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "District of Columbia",
     city: "Washington",
+    avatarUrl: "https://randomuser.me/api/portraits/women/69.jpg",
   },
   {
     name: "Carlos Reeves",
@@ -199,6 +220,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Ohio",
     city: "North Olmsted",
+    avatarUrl: "https://randomuser.me/api/portraits/men/15.jpg",
   },
   {
     name: "Emilie Vignozzi",
@@ -208,6 +230,7 @@ export const dummyUsers: User[] = [
     country: "Canada",
     region: "Ontario",
     city: "London",
+    avatarUrl: "https://randomuser.me/api/portraits/women/17.jpg",
   },
   {
     name: "Blake Poole",
@@ -217,6 +240,7 @@ export const dummyUsers: User[] = [
     country: "South Korea",
     region: "Gyeonggi-do",
     city: "Hanam",
+    avatarUrl: "https://randomuser.me/api/portraits/women/19.jpg",
   },
   {
     name: "Blake Serrano",
@@ -226,6 +250,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Washington",
     city: "Shelton",
+    avatarUrl: "https://randomuser.me/api/portraits/women/20.jpg",
   },
   {
     name: "Blake Stephenson",
@@ -235,6 +260,7 @@ export const dummyUsers: User[] = [
     country: "Japan",
     region: "Miyagi",
     city: "Sendai",
+    avatarUrl: "https://randomuser.me/api/portraits/women/45.jpg",
   },
   {
     name: "Blake Tyler",
@@ -244,6 +270,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Michigan",
     city: "Rochester",
+    avatarUrl: "https://randomuser.me/api/portraits/men/76.jpg",
   },
   {
     name: "Blanche Boone",
@@ -253,6 +280,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Texas",
     city: "Burnet",
+    avatarUrl: "https://randomuser.me/api/portraits/women/52.jpg",
   },
   {
     name: "Blanche Chandler",
@@ -262,6 +290,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Illinois",
     city: "Chicago",
+    avatarUrl: "https://randomuser.me/api/portraits/women/62.jpg",
   },
   {
     name: "Blanche Ciucchi",
@@ -271,6 +300,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Georgia",
     city: "Carrollton",
+    avatarUrl: "https://randomuser.me/api/portraits/men/73.jpg",
   },
   {
     name: "Blanche Hall",
@@ -280,6 +310,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Virginia",
     city: "Stafford",
+    avatarUrl: "https://randomuser.me/api/portraits/men/74.jpg",
   },
   {
     name: "Blanche Newman",
@@ -289,6 +320,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Alabama",
     city: "Decatur",
+    avatarUrl: "https://randomuser.me/api/portraits/men/12.jpg",
   },
   {
     name: "Blanche Signorini",
@@ -298,6 +330,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "California",
     city: "Simi Valley",
+    avatarUrl: "https://randomuser.me/api/portraits/men/85.jpg",
   },
   {
     name: "Blanche Sorbi",
@@ -307,6 +340,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Idaho",
     city: "Idaho Falls",
+    avatarUrl: "https://randomuser.me/api/portraits/men/47.jpg",
   },
   {
     name: "Blanche Tagliaferri",
@@ -316,6 +350,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Illinois",
     city: "Danville",
+    avatarUrl: "https://randomuser.me/api/portraits/men/59.jpg",
   },
   {
     name: "Bobby Collins",
@@ -325,6 +360,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "North Carolina",
     city: "Raleigh",
+    avatarUrl: "https://randomuser.me/api/portraits/men/89.jpg",
   },
   {
     name: "Bobby Dawson",
@@ -334,6 +370,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Texas",
     city: "Mesquite",
+    avatarUrl: "https://randomuser.me/api/portraits/men/90.jpg",
   },
   {
     name: "Bobby de Waal",
@@ -343,6 +380,7 @@ export const dummyUsers: User[] = [
     country: "China",
     region: "Jiangsu",
     city: "Xuzhou",
+    avatarUrl: "https://randomuser.me/api/portraits/men/61.jpg",
   },
   {
     name: "Bobby Kato",
@@ -352,6 +390,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Montana",
     city: "Billings",
+    avatarUrl: "https://randomuser.me/api/portraits/men/88.jpg",
   },
   {
     name: "Bobby Kool",
@@ -361,6 +400,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Connecticut",
     city: "Enfield",
+    avatarUrl: "https://randomuser.me/api/portraits/men/86.jpg",
   },
   {
     name: "Bobby Simon",
@@ -370,6 +410,7 @@ export const dummyUsers: User[] = [
     country: "United States",
     region: "Florida",
     city: "Fort Lauderdale",
+    avatarUrl: "https://randomuser.me/api/portraits/men/54.jpg",
   },
   {
     name: "Bobby Tamura",
@@ -379,6 +420,7 @@ export const dummyUsers: User[] = [
     country: "India",
     region: "Assam",
     city: "Guwahati",
+    avatarUrl: "https://randomuser.me/api/portraits/men/77.jpg",
   },
   {
     name: "Bobby Timmermans",
@@ -388,6 +430,7 @@ export const dummyUsers: User[] = [
     country: "Germany",
     region: "North Rhine-Westphalia",
     city: "Düsseldorf",
+    avatarUrl: "https://randomuser.me/api/portraits/men/23.jpg",
   },
   {
     name: "Bobby Tyler",
@@ -397,5 +440,6 @@ export const dummyUsers: User[] = [
     country: "Japan",
     region: "Chiba",
     city: "Chiba",
+    avatarUrl: "https://randomuser.me/api/portraits/men/92.jpg",
   },
 ];

@@ -10,10 +10,12 @@ interface FilteredUsersStore {
   filterUsers: () => void;
 }
 
+// Store for users filtered by the active query builder rules
 export const useFilteredUsersStore = create<FilteredUsersStore>((set) => ({
   filteredUsers: dummyUsers,
   isLoading: false,
 
+  // Applies query rules to users and updates filtered list
   filterUsers: () => {
     set({ isLoading: true });
     setTimeout(() => {
@@ -31,6 +33,7 @@ export const useFilteredUsersStore = create<FilteredUsersStore>((set) => ({
   },
 }));
 
+// Re-run filtering whenever the query store changes
 useQueryStore.subscribe(() => {
   useFilteredUsersStore.getState().filterUsers();
 });

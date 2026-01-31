@@ -9,7 +9,7 @@ export function parseDate(dateStr: string): Date | null {
 
 // Parse date range from "yyyy-MM-dd to yyyy-MM-dd" format
 export function parseDateRange(
-  rangeStr: string
+  rangeStr: string,
 ): { from: Date; to: Date } | null {
   if (!rangeStr) return null;
 

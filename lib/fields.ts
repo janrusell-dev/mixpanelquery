@@ -90,4 +90,16 @@ export const fields: Field[] = [
       { name: "isNotSet", label: "Is not set" },
     ],
   },
+  {
+    name: "avatarUrl",
+    label: "Avatar URL",
+    type: "text",
+    operators: [
+      { name: "=", label: "Is" },
+      { name: "!=", label: "Is not" },
+      { name: "contains", label: "Contains" },
+      { name: "doesNotContain", label: "Does not contain" },
+      { name: "isNotSet", label: "Is not set" },
+    ],
+  },
 ];

@@ -3,10 +3,10 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { useValueEditorStore } from "@/hooks/useValueEditor";
 import { Calendar } from "./ui/calendar";
-import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryBuilder } from "@/hooks/useQueryBuilder";
 
 export function DateRangeEditor(props: ValueEditorProps) {
-  const { lastAddedRuleId, resetLastAddedRule } = useFilterBuilder();
+  const { lastAddedRuleId, resetLastAddedRule } = useQueryBuilder();
   const {
     open,
     setOpen,

@@ -4,23 +4,32 @@ import { useEffect, useMemo, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { ValueEditorProps } from "react-querybuilder";
 
+// Manages value editor state for QueryBuilder (dates, multi-select, presets)
 export function useValueEditorStore(
   props: ValueEditorProps,
   lastAddedRuleId: string | null,
   resetLastAddedRule: () => void,
 ) {
   const [open, setOpen] = useState(false);
+  const operator = props.rule?.operator;
 
   const isDateField = useMemo(() => {
     return props.field === "updatedAt" || props.fieldData?.datatype === "date";
   }, [props.field, props.fieldData]);
 
+  // Auto-open editor when a rule is newly added
   useEffect(() => {
     if (lastAddedRuleId && props.rule?.id === lastAddedRuleId) {
       setOpen(true);
       resetLastAddedRule();
     }
   }, [lastAddedRuleId, props.rule?.id, resetLastAddedRule]);
+
+  const isDaysCountOperator = useMemo(() => {
+    return ["last", "notInLast", "beforeLast", "inNext"].includes(
+      operator || "",
+    );
+  }, [operator]);
 
   const [dateRange, setDateRange] = useState<DateRange | undefined>(() => {
     if (isDateField) {
@@ -33,24 +42,32 @@ export function useValueEditorStore(
 
   useEffect(() => {
     if (isDateField && !props.value) {
-      const today = new Date();
-      const sevenDaysAgo = subDays(today, 6);
-      setDateRange({ from: sevenDaysAgo, to: today });
-      props.handleOnChange(
-        `${format(sevenDaysAgo, "yyyy-MM-dd")} to ${format(
-          today,
-          "yyyy-MM-dd",
-        )}`,
-      );
+      if (isDaysCountOperator) {
+        // Default to 7 days for "last" operators
+        props.handleOnChange("7");
+      } else {
+        const today = new Date();
+        const sevenDaysAgo = subDays(today, 6);
+        setDateRange({ from: sevenDaysAgo, to: today });
+        props.handleOnChange(
+          `${format(sevenDaysAgo, "yyyy-MM-dd")} to ${format(
+            today,
+            "yyyy-MM-dd",
+          )}`,
+        );
+      }
     }
-  }, [isDateField]);
+  }, [isDateField, operator]);
 
   const handleDateRangeSelect = (range: DateRange | undefined) => {
     setDateRange(range);
   };
 
   const applyDateRange = () => {
-    if (dateRange?.from && dateRange?.to) {
+    if (isDaysCountOperator && dateRange?.from && dateRange?.to) {
+      const days = differenceInDays(dateRange.to, dateRange.from) + 1;
+      props.handleOnChange(String(days));
+    } else if (dateRange?.from && dateRange?.to) {
       props.handleOnChange(
         `${format(dateRange.from, "yyyy-MM-dd")} to ${format(
           dateRange.to,
@@ -91,6 +108,7 @@ export function useValueEditorStore(
     }
   }, [open, props.value]);
 
+  // Builds selectable values from dummy data (non-date fields)
   const options = useMemo(() => {
     if (isDateField) return [];
 
@@ -120,10 +138,16 @@ export function useValueEditorStore(
     setOpen(false);
   };
 
+  // Formats the display label shown in the value editor button
   const displayLabel = useMemo(() => {
-    if (isDateField && dateRange?.from && dateRange?.to) {
-      return `${daysInRange} days`;
+    if (isDateField && isDaysCountOperator) {
+      const days = props.value || "7";
+      return `${days} ${days === "1" ? "day" : "days"}`;
     }
+    if (isDateField && dateRange?.from && dateRange?.to) {
+      return `${daysInRange} ${daysInRange === 1 ? "day" : "days"}`;
+    }
+
     if (isDateField && dateRange?.from) {
       return format(dateRange.from, "MMM dd, yyyy");
     }
