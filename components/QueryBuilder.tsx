@@ -1,10 +1,7 @@
 "use client";
 
 import { fields } from "../lib/fields";
-import QueryBuilder, {
-  ActionProps,
-  InlineCombinator,
-} from "react-querybuilder";
+import QueryBuilder, { ActionProps } from "react-querybuilder";
 import "react-querybuilder/dist/query-builder.css";
 import { useQueryStore } from "@/store/useQueryStore";
 import { FilterMenu } from "./FilterMenu";
@@ -101,10 +98,9 @@ export function QueryBuilderComponent() {
             queryBuilder: "bg-transparent p-0 border-none",
             ruleGroup:
               "flex flex-col gap-2 border-2 border-slate-200 bg-indigo-50 rounded-lg p-4 my-2",
-            rule: "flex items-center gap-2 py-1 w-full max-w-2xl group",
             combinators: "first:hidden",
             addRule: "w-fit",
-            body: "flex flex-col gap-2",
+            body: "flex flex-col gap-4",
           }}
         />
       </div>

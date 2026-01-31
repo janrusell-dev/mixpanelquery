@@ -8,6 +8,7 @@ export interface User {
   country: string;
   region: string;
   city: string;
+  avatarUrl: string;
 }
 
 export interface UserStore {

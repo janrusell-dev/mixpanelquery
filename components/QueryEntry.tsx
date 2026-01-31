@@ -1,10 +1,11 @@
 import { useQueryStore } from "@/store/useQueryStore";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
-import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryBuilder } from "@/hooks/useQueryBuilder";
 export function QueryEntry() {
-  const { addGroup, activeGroupId, setActiveGroupId } = useQueryStore();
-  const { clearAll, hasFilter } = useFilterBuilder();
+  const { addGroup, activeGroupId, setActiveGroupId, clearQuery } =
+    useQueryStore();
+  const { hasFilter } = useQueryBuilder();
 
   const handleAddGroup = () => {
     const newGroupId = addGroup(activeGroupId);
@@ -42,7 +43,7 @@ export function QueryEntry() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={clearAll}
+          onClick={clearQuery}
           className="
             h-8 text-slate-500 hover:text-red-600 hover:bg-red-50
             gap-1.5 font-semibold

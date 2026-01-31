@@ -12,9 +12,9 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { ValueEditorProps } from "react-querybuilder";
 import { DateRangeEditor } from "./DateRangeEditor";
-import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryBuilder } from "@/hooks/useQueryBuilder";
 export function ValueEditor(props: ValueEditorProps) {
-  const { lastAddedRuleId, resetLastAddedRule } = useFilterBuilder();
+  const { lastAddedRuleId, resetLastAddedRule } = useQueryBuilder();
   const {
     open,
     setOpen,

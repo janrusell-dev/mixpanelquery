@@ -2,8 +2,9 @@ import { Plus, SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Input } from "./ui/input";
-import { useFilterBuilder } from "@/hooks/useFilterBuilder";
+import { useQueryBuilder } from "@/hooks/useQueryBuilder";
 import { useQueryStore } from "@/store/useQueryStore";
+import { useFilterMenu } from "@/hooks/useFilterMenu";
 
 interface FilterMenuProps {
   onSelectOverride?: (fieldName: string) => void;
@@ -16,17 +17,18 @@ export function FilterMenu({
   trigger,
   targetGroupId,
 }: FilterMenuProps) {
+  const { addRuleWithField } = useQueryBuilder();
+  const setActiveGroupId = useQueryStore((state) => state.setActiveGroupId);
   const {
-    setField,
-    setPropertySearch,
-    propertySearch,
     isOpen,
     setIsOpen,
-    filteredProperties,
+    propertySearch,
+    setPropertySearch,
     hoveredProperty,
+    filteredProperties,
     setHoveredProperty,
-  } = useFilterBuilder();
-  const setActiveGroupId = useQueryStore((state) => state.setActiveGroupId);
+    resetSearch,
+  } = useFilterMenu();
 
   const handleSelect = (fieldName: string) => {
     if (targetGroupId !== undefined) {
@@ -35,11 +37,12 @@ export function FilterMenu({
     if (onSelectOverride) {
       onSelectOverride(fieldName);
     } else {
-      setField(fieldName, targetGroupId);
+      addRuleWithField(fieldName, targetGroupId);
     }
 
     setIsOpen(false);
     setPropertySearch("");
+    resetSearch();
   };
 
   return (
