@@ -27,7 +27,6 @@ export function useValueEditorStore(
         resetLastAddedRule();
       }, 0);
       return () => clearTimeout(timeout);
-
     }
   }, [lastAddedRuleId, props.rule?.id, resetLastAddedRule, isDateField]);
 
