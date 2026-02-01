@@ -20,7 +20,7 @@ export const useQueryStore = create<QueryStore>()(
   devtools((set, get) => ({
     query: initialQuery,
 
-    // Replaces entire query (used for resets or imports)
+    // Replaces entire query
     setQuery: (newQuery) => set({ query: newQuery }),
 
     // Adds a rule to a target group (or active group / root)
@@ -103,8 +103,9 @@ export const useQueryStore = create<QueryStore>()(
     },
 
     activeGroupId: null as string | null,
-
+    lastAddedRuleId: null as string | null,
     setActiveGroupId: (id: string | null) => set({ activeGroupId: id }),
+    setLastAddedRuleId: (id: string | null) => set({ lastAddedRuleId: id }),
 
     // Resets query to initial empty state
     clearQuery: () =>
