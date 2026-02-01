@@ -54,7 +54,7 @@ git clone https://github.com/janrusell-dev/mixpanelquery.git
 cd mixpanelquery
 npm install
 ```
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 ## Usage
 
 1. Add a filter — Click the  + Filter button and select a property (e.g. Name, Country, City)
