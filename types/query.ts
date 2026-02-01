@@ -9,5 +9,7 @@ export interface QueryStore {
   addGroup: (parentGroupId: string | null) => string;
   clearQuery: () => void;
   activeGroupId: string | null;
+  lastAddedRuleId: string | null;
   setActiveGroupId: (id: string | null) => void;
+  setLastAddedRuleId: (id: string | null) => void;
 }

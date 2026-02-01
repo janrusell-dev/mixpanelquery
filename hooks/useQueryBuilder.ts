@@ -16,8 +16,8 @@ export function useQueryBuilder() {
   const activeGroupId = useQueryStore((state) => state.activeGroupId);
 
   // UI state
-  const [propertySearch, setPropertySearch] = useState("");
-  const [lastAddedRuleId, setLastAddedRuleId] = useState<string | null>(null);
+  const lastAddedRuleId = useQueryStore((state) => state.lastAddedRuleId);
+  const setLastAddedRuleId = useQueryStore((state) => state.setLastAddedRuleId);
 
   // Adds a new rule with default operator to a target group
   const addRuleWithField = (
@@ -70,8 +70,6 @@ export function useQueryBuilder() {
   const hasFilter = query.rules.length > 0;
 
   return {
-    propertySearch,
-    setPropertySearch,
     lastAddedRuleId,
     resetLastAddedRule,
     activeGroupId,
