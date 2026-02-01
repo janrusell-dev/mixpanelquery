@@ -55,8 +55,8 @@ cd mixpanelquery
 npm install
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-## Usage
 
+## Usage
 1. Add a filter — Click the  + Filter button and select a property (e.g. Name, Country, City)
 2. Set a value — Set value selector from the button with the Select Value... placeholder. Pick one or more values
 3. Change the operator — Use the operator dropdown to switch between Is, Contains, Last X days, etc.
