@@ -59,7 +59,7 @@ export function useValueEditorStore(
         );
       }
     }
-  }, [isDateField, operator]);
+  }, [isDateField, operator, !!isDaysCountOperator]);
 
   const handleDateRangeSelect = (range: DateRange | undefined) => {
     setDateRange(range);
