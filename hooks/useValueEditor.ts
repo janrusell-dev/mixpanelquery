@@ -20,9 +20,6 @@ export function useValueEditorStore(
   // Auto-open editor when a rule is newly added
   useEffect(() => {
     if (lastAddedRuleId && props.rule?.id === lastAddedRuleId) {
-      if (!isDateField) {
-        setOpen(true);
-      }
       resetLastAddedRule();
     }
   }, [lastAddedRuleId, props.rule?.id, resetLastAddedRule]);
