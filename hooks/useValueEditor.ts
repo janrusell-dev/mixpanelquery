@@ -20,9 +20,15 @@ export function useValueEditorStore(
   // Auto-open editor when a rule is newly added
   useEffect(() => {
     if (lastAddedRuleId && props.rule?.id === lastAddedRuleId) {
-      resetLastAddedRule();
+      if (!isDateField) {
+        setOpen(true);
+      }
+      const timeout = setTimeout(() => {
+        resetLastAddedRule();
+      }, 0);
+      return () => clearTimeout(timeout);
     }
-  }, [lastAddedRuleId, props.rule?.id, resetLastAddedRule]);
+  }, [lastAddedRuleId, props.rule?.id, resetLastAddedRule, isDateField]);
 
   const isDaysCountOperator = useMemo(() => {
     return ["last", "notInLast", "beforeLast", "inNext"].includes(
@@ -56,7 +62,7 @@ export function useValueEditorStore(
         );
       }
     }
-  }, [isDateField, operator, !!isDaysCountOperator]);
+  }, [isDateField, operator, isDaysCountOperator]);
 
   const handleDateRangeSelect = (range: DateRange | undefined) => {
     setDateRange(range);
