@@ -17,7 +17,7 @@
 
 ## About The Project
 
-(YOUR_LIVE_DEPLOYMENT_URL)
+Live URL: https://mixpanelquery.vercel.app
 
 A lightweight React/Node.js application for filtering and querying user data, inspired by Mixpanel's query builder feature. Build dynamic queries using rules and nested groups, with support for both text and date-based filters.
 
@@ -50,18 +50,33 @@ A lightweight React/Node.js application for filtering and querying user data, in
 Clone the repo:
 
 ```bash
-git clone https://github.com/janrusell/mixpanel-query-builder.git
-cd mixpanel-query-builder
+git clone https://github.com/janrusell-dev/mixpanelquery.git
+cd mixpanelquery
 npm install
 ```
 
 ## Usage
 
-1. Add rules and groups using the query builder UI
+1. Add a filter — Click the  + Filter button and select a property (e.g. Name, Country, City)
+2. Set a value — Set value selector from the button with the Select Value... placeholder. Pick one or more values
+3. Change the operator — Use the operator dropdown to switch between Is, Contains, Last X days, etc.
+4. Group rules — Click + Group to create a nested group. Switch between AND / OR to control logic
+5. Preview results — The user table updates in real time as you build your query
+6. Clear filters — Click Clear All to reset everything
 
-2. Filter users by fields such as name, email, country, region, city, updatedAt or avatarUrl
-   Use operators like =, !=, contains, doesNotContain, last, between, before, etc.
-
-3. Preview filtered users in real time
-
+### Example Queries
+#### Users in Georgia OR Hong Kong:
+``` bash
+Country  Is  Georgia
+  OR
+Country  Is  Hong Kong
+```
+#### US users in Atlanta updated in the last 7 days:
+``` bash
+Country   Is      United States
+  AND
+City      Is      Atlanta
+  AND
+Updated at  Last  7 days
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
