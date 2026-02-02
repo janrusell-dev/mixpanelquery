@@ -48,21 +48,11 @@ export function useValueEditorStore(
   });
 
   useEffect(() => {
-    console.log("🔍 Date init effect:", {
-      isDateField,
-      hasValue: !!props.value,
-      isDaysCountOperator,
-      field: props.field,
-    });
-
     if (isDateField && !props.value) {
-      // ✅ Delay by one tick so react-querybuilder finishes its render cycle
       const timeout = setTimeout(() => {
         if (isDaysCountOperator) {
-          console.log("🔍 Setting default 7 days");
           props.handleOnChange("7");
         } else {
-          console.log("🔍 Setting default date range");
           const today = new Date();
           const sevenDaysAgo = subDays(today, 6);
           setDateRange({ from: sevenDaysAgo, to: today });
