@@ -17,6 +17,8 @@ export function useValueEditorStore(
     return props.field === "updatedAt" || props.fieldData?.datatype === "date";
   }, [props.field, props.fieldData]);
 
+  console.log("🔍 ValueEditor isDateField:", isDateField);
+
   // Auto-open editor when a rule is newly added
   useEffect(() => {
     if (lastAddedRuleId && props.rule?.id === lastAddedRuleId) {
@@ -46,21 +48,31 @@ export function useValueEditorStore(
   });
 
   useEffect(() => {
+    console.log("🔍 Date init effect:", {
+      isDateField,
+      hasValue: !!props.value,
+      isDaysCountOperator,
+      field: props.field,
+    });
+
     if (isDateField && !props.value) {
-      if (isDaysCountOperator) {
-        // Default to 7 days for "last" operators
-        props.handleOnChange("7");
-      } else {
-        const today = new Date();
-        const sevenDaysAgo = subDays(today, 6);
-        setDateRange({ from: sevenDaysAgo, to: today });
-        props.handleOnChange(
-          `${format(sevenDaysAgo, "yyyy-MM-dd")} to ${format(
-            today,
-            "yyyy-MM-dd",
-          )}`,
-        );
-      }
+      // ✅ Delay by one tick so react-querybuilder finishes its render cycle
+      const timeout = setTimeout(() => {
+        if (isDaysCountOperator) {
+          console.log("🔍 Setting default 7 days");
+          props.handleOnChange("7");
+        } else {
+          console.log("🔍 Setting default date range");
+          const today = new Date();
+          const sevenDaysAgo = subDays(today, 6);
+          setDateRange({ from: sevenDaysAgo, to: today });
+          props.handleOnChange(
+            `${format(sevenDaysAgo, "yyyy-MM-dd")} to ${format(today, "yyyy-MM-dd")}`,
+          );
+        }
+      }, 0);
+
+      return () => clearTimeout(timeout);
     }
   }, [isDateField, operator, isDaysCountOperator]);
 
